@@ -10,7 +10,6 @@ module Api
       def index
         locations = Location.search(params).page(params[:page]).
                     per(params[:per_page])
-
         return unless stale?(etag: cache_key(locations), public: true)
 
         generate_pagination_headers(locations)

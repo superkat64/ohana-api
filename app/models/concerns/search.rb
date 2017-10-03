@@ -11,7 +11,7 @@ module Search
     end
 
     scope :category, (lambda do |category|
-      joins(services: :categories).where(categories: { name: category })
+      joins(services: :categories).where(categories: { name: category }).distinct
     end)
 
     scope :is_near, LocationFilter
@@ -24,6 +24,7 @@ module Search
   end
 
   module ClassMethods
+
     def status(param)
       param == 'active' ? where(active: true) : where(active: false)
     end
